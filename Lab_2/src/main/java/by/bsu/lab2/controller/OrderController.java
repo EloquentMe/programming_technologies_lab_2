@@ -2,7 +2,7 @@ package by.bsu.lab2.controller;
 
 import java.util.List;
 
-import by.bsu.lab2.dao.AccountingSystem;
+import by.bsu.lab2.dao.AccountingAccessor;
 import by.bsu.lab2.dao.DataAccessor;
 import by.bsu.lab2.entity.Order;
 import by.bsu.lab2.entity.Request;
@@ -12,7 +12,7 @@ public class OrderController {
 
 	public OrderForm m_OrderForm;
 	public DataAccessor dataAccessObject;
-	public AccountingSystem accountingSystem;
+	public AccountingAccessor accountingSystem;
 	public Order currentOrder;
 	public List<Request> current;
 

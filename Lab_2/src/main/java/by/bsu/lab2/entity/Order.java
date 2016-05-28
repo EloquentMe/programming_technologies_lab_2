@@ -1,23 +1,30 @@
 package by.bsu.lab2.entity;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 
+	private long id;
+	
 	private Person client;
-	private ArrayList<Merchandise> existingProducts;
-	public Person m_Person;
-	public Merchandise m_Merchandise;
-
-	public Order(){
-
+	private List<Merchandise> existingProducts;
+	
+	public long getId() {
+		return id;
 	}
-
-	public void addMerchandise(){
-
+	public void setId(long id) {
+		this.id = id;
 	}
-
-	public void checkProducts(){
-
+	public Person getClient() {
+		return client;
+	}
+	public void setClient(Person client) {
+		this.client = client;
+	}
+	public List<Merchandise> getExistingProducts() {
+		return existingProducts;
+	}
+	public void setExistingProducts(List<Merchandise> existingProducts) {
+		this.existingProducts = existingProducts;
 	}
 
 }
