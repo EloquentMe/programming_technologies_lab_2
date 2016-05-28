@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import by.bsu.lab2.controller.FormController;
 import by.bsu.lab2.controller.LoginController;
 import by.bsu.lab2.dao.UserAccessor.Role;
 
@@ -30,7 +31,7 @@ public class LoginForm extends JFrame{
 	private JButton cancelButton;
 	private JLabel loginLabel;
 	private JLabel passLabel;
-
+	public FormController formController;
 	public LoginController controller;
 
 	public LoginForm(){
@@ -80,9 +81,10 @@ public class LoginForm extends JFrame{
 				Role role = controller.doLogin(loginField.getText(), String.valueOf(passField.getPassword()));
 				
 				if (role == null) {
-					JOptionPane.showMessageDialog(null, "Noooooooooooo");
+					JOptionPane.showMessageDialog(null, "Password|User not recognized");
 				} else {
 					JOptionPane.showMessageDialog(null, String.format("%s logged in", role.name()));
+						formController.showForm(role);
 				}
 			}
 		});
