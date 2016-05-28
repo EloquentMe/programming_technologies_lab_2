@@ -2,7 +2,7 @@ package by.bsu.lab2.controller;
 
 import java.util.List;
 
-import by.bsu.lab2.dao.DataAccessor;
+import by.bsu.lab2.dao.RequestAccessor;
 import by.bsu.lab2.entity.Request;
 import by.bsu.lab2.ui.RequestForm;
 
@@ -10,7 +10,7 @@ public class RequestController {
 
 	public RequestForm m_RequestForm;
 	public Request currentRequest;
-	public DataAccessor dataAccessObject;
+	public RequestAccessor dataAccessObject;
 	public List<Request> current;
 
 	public RequestController(RequestForm reqForm){
