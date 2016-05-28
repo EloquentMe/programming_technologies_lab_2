@@ -34,10 +34,9 @@ public class UserAccessor {
 		}
 	}
 
-	public Role doLogin(String username, String pass) {
-		Role role = Role.valueOf(username);
-		if (pass.equals(users.get(role))) {
-			return role;
+	public Role doLogin(Role username, String pass) {
+		if (pass.equals(users.get(username))) {
+			return username;
 		} else {
 			return null;
 		}

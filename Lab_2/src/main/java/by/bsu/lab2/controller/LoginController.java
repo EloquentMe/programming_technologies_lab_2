@@ -14,7 +14,7 @@ public class LoginController {
 		userAccessor = new UserAccessor();
 	}
 
-	public Role doLogin(String login, String password){
+	public Role doLogin(Role login, String password){
 		return userAccessor.doLogin(login, password);
 	}
 
