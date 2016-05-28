@@ -1,28 +1,125 @@
 package by.bsu.lab2.ui;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import by.bsu.lab2.controller.OrderController;
 
 public class OrderForm extends JFrame{
 
-	private JPanel contentPane;
+	private JButton okButton;
+	private JButton cancelButton;
+	private JButton addButton;
+	private JButton deleteButton;
+	private JTextArea reqArea;
+	private JTextField amountField;
+	private JList<String> invList;
+	private JList<String> orderList;
+	private JLabel amountLabel;
+	private JPanel buttonsPanel;
+	private JPanel editPanel;
+	private JPanel amountPanel;
+	private JScrollPane reqScrollPane;
+	private JScrollPane invScrollPane;
+	private JScrollPane orderScrollPane;
+	
 	public OrderController controller;
 
 	public OrderForm(){
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 150);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		setBounds(100, 100, 500, 500);
 		
 		controller = new OrderController(this);
+		
+		invList = new JList<String>();
+		invList.setLayoutOrientation(JList.VERTICAL);
+		invList.setVisibleRowCount(0);
+		invList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		orderList = new JList<String>();
+		orderList.setLayoutOrientation(JList.VERTICAL);
+		orderList.setVisibleRowCount(0);
+		orderList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		invScrollPane = new JScrollPane(invList);
+		orderScrollPane = new JScrollPane(orderList);
+		
+		reqArea = new JTextArea();
+		reqScrollPane = new JScrollPane(reqArea);
+		amountField = new JTextField();
+		okButton = new JButton("OK");
+		cancelButton = new JButton("Cancel");
+		addButton = new JButton("Add");
+		deleteButton = new JButton("Delete");
+		amountLabel = new JLabel("Amount:");
+		
+		buttonsPanel = new JPanel();
+		editPanel = new JPanel();
+		amountPanel = new JPanel();
+		buttonsPanel.setLayout(new GridLayout(2, 0));
+		editPanel.setLayout(new GridLayout(3, 0));
+		amountPanel.setLayout(new GridLayout(1, 1));
+		buttonsPanel.add(amountLabel);
+		buttonsPanel.add(amountField);
+		buttonsPanel.add(addButton);
+		buttonsPanel.add(deleteButton);
+		editPanel.add(okButton);
+		editPanel.add(cancelButton);
+		editPanel.add(buttonsPanel);
+		
+		setLayout(new GridLayout(5, 0));
+		add(reqScrollPane);
+		add(invScrollPane);
+		add(buttonsPanel);
+		add(orderScrollPane);
+		add(editPanel);
+		
+		addButton.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			} });
+		deleteButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			} });
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				controller.saveOrder();
+				
+			} });
+		cancelButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			} });
+		
 	}
 
 	public void createOrder(){
