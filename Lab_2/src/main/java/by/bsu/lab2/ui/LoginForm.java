@@ -79,12 +79,14 @@ public class LoginForm extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Role role = controller.doLogin(loginField.getText(), String.valueOf(passField.getPassword()));
-				
 				if (role == null) {
-					JOptionPane.showMessageDialog(null, "Password|User not recognized");
+					JOptionPane.showMessageDialog(null, "Password is not correct");
 				} else {
 					JOptionPane.showMessageDialog(null, String.format("%s logged in", role.name()));
+					formController = new FormController();
+					LoginForm.this.setVisible(false);
 						formController.showForm(role);
+						
 				}
 			}
 		});

@@ -1,5 +1,6 @@
 package by.bsu.lab2.controller;
 
+import by.bsu.lab2.Starter;
 import by.bsu.lab2.dao.UserAccessor.Role;
 import by.bsu.lab2.ui.InventoryForm;
 import by.bsu.lab2.ui.LoginForm;
@@ -12,6 +13,14 @@ public class FormController {
 	private LoginForm loginForm;
 	private OrderForm orderForm;
 	private RequestForm reqForm;
+	
+	public FormController()
+	{
+		this.invForm = new InventoryForm();
+		this.loginForm = null;
+		this.orderForm = new OrderForm();
+		this.reqForm = new RequestForm();
+	}
 	
 	public FormController(InventoryForm inv, LoginForm login, OrderForm ord, RequestForm req) {
 		this.invForm = inv;
