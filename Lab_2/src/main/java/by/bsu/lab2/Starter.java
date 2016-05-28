@@ -1,6 +1,7 @@
 package by.bsu.lab2;
 import java.awt.EventQueue;
 
+import by.bsu.lab2.dao.AccountingAccessor;
 import by.bsu.lab2.ui.LoginForm;
 
 
@@ -11,6 +12,7 @@ public class Starter {
 			public void run() {
 				try {
 					LoginForm loginForm = new LoginForm();
+					new AccountingAccessor().getLog();
 					loginForm.setVisible(true);
 					//InventoryForm invForm = new InventoryForm();
 					//invForm.setVisible(true);
