@@ -1,82 +1,142 @@
 package by.bsu.lab2.ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import by.bsu.lab2.controller.InventoryController;
+import by.bsu.lab2.controller.RequestController;
 
 public class InventoryForm extends JFrame {
 	private JPanel contentPane;
-	private JScrollPane merchPanel;
-	private JScrollPane invPanel;
-	private JButton addItem;
-	private JButton delItem;
-	private JList<String> merchList;
+	private JPanel invListPanel;
+	private JPanel invInfPanel;
+	private JPanel merchInfPanel;
+	private JPanel buttPanel;
+	private JPanel finishPanel;
 	private JList<String> invList;
+	private JTextField merchName;
+	private JTextField merchAmount;
+	private JTextField merchPrice;
+	private JLabel merchN;
+	private JLabel merchAm;
+	private JLabel merchPr;
+	private JButton addMerch;
+	private JButton delMerch;
+	private JButton saveInv;
+	private JButton cancelInv;
+	
 	public InventoryController controller;
 
 	public InventoryForm(){
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 600);
+		setBounds(100, 100, 1000, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		setContentPane(contentPane);
 		
 		controller = new InventoryController(this);
 		
-		String[] data = {"skb","awfija","awlg"};
-		merchList = new JList<String>(data);
-		merchList.setLayoutOrientation(JList.VERTICAL);
-		merchList.setVisibleRowCount(0);
+		invListPanel = new JPanel();
+		invListPanel.setLayout(new BorderLayout(0,0));
+		invInfPanel = new JPanel();
+		invInfPanel.setLayout(new BoxLayout(invInfPanel, BoxLayout.X_AXIS));
+		merchInfPanel = new JPanel();
+		merchInfPanel.setLayout(new GridLayout(3, 2));
+		merchInfPanel.setAlignmentX(CENTER_ALIGNMENT);
+		buttPanel = new JPanel();
+		buttPanel.setLayout(new BoxLayout(buttPanel, BoxLayout.Y_AXIS));
+		finishPanel = new JPanel();
+		finishPanel.setLayout(new BoxLayout(finishPanel, BoxLayout.X_AXIS));
+		
+		contentPane.add(invInfPanel);
+		contentPane.add(invListPanel);
+		contentPane.add(finishPanel);
+		
+		invInfPanel.add(merchInfPanel);
+		invInfPanel.add(buttPanel);
+			
+		merchName = new JTextField();
+		merchName.setMaximumSize(new Dimension(170, 20));
+		merchAmount = new JTextField();
+		merchAmount.setMaximumSize(new Dimension(170, 20));
+		merchPrice = new JTextField();
+		merchPrice.setMaximumSize(new Dimension(170, 20));
+
+		addMerch = new JButton("Add Item");
+		delMerch = new JButton("Delete Item");
+		saveInv = new JButton("Save");
+		cancelInv = new JButton("Cancel");
+		
+
+		merchN = new JLabel("Merchandise name");
+		merchAm = new JLabel("Mercandise amount");	
+		merchPr = new JLabel("Merchandise price");
+		
+		merchInfPanel.add(merchN);
+		merchInfPanel.add(merchName);
+		merchInfPanel.add(merchAm);
+		merchInfPanel.add(merchAmount);
+		merchInfPanel.add(merchPr);
+		merchInfPanel.add(merchPrice);
+		
+		buttPanel.add(addMerch);
+		buttPanel.add(delMerch);
+		
+		finishPanel.add(saveInv);
+		finishPanel.add(cancelInv);
+		
+		String[] data = {"kfug", "akjfi","kefia"};
 		invList = new JList<String>(data);
-		invList.setLayoutOrientation(JList.VERTICAL);
-		invList.setVisibleRowCount(0);
-		merchPanel = new JScrollPane(merchList);
-		merchPanel.setPreferredSize(new Dimension(100, 100));
-		invPanel = new JScrollPane(invList);
-		invPanel.setPreferredSize(new Dimension(100, 100));
-		addItem = new JButton(">  (Add Item to Inventory)");
-		delItem = new JButton("<  (Delete Item from Inventory)");
+		
+		invListPanel.add(invList);
 		
 		
-		contentPane.add(merchPanel, BorderLayout.WEST);
-		contentPane.add(invPanel, BorderLayout.EAST);
-		contentPane.add(addItem, BorderLayout.NORTH);
-		contentPane.add(delItem, BorderLayout.SOUTH);
-		
-		
-		
-		addItem.addActionListener(new ActionListener() {
+		addMerch.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				controller.addMerchandise();
-				
-				
 			}
 		});
 		
-		delItem.addActionListener(new ActionListener() {
+		delMerch.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				controller.deleteMerchandise();
 				
 			}
+		});	
+		
+		saveInv.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				
+			}
 		});
-
-
+		
+		cancelInv.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 
 	public void finalize() throws Throwable {

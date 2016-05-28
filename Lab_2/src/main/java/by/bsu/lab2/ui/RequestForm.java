@@ -24,23 +24,23 @@ public class RequestForm extends JFrame{
 	private JPanel clientInfPanel;
 	private JPanel merchInfPanel;
 	private JPanel buttPanel;
+	private JPanel finishPanel;
 	private JList<String> reqList;
 	private JTextField clientName;
 	private JTextField clientSurname;
 	private JTextField clientCoord;
 	private JTextField merchName;
 	private JTextField merchAmount;
-	private JTextField merchPrice;
 	private JLabel clN;
 	private JLabel clSn;
 	private JLabel clC;
 	private JLabel merchN;
 	private JLabel merchAm;
-	private JLabel merchPr;
 	private JButton delReq;
 	private JButton addMerch;
 	private JButton delMerch;
-	private JButton editMerch;
+	private JButton saveReq;
+	private JButton cancelReq;
 	
 	public RequestController controller;
 
@@ -63,13 +63,16 @@ public class RequestForm extends JFrame{
 		clientInfPanel.setLayout(new GridLayout(3, 2));
 		clientInfPanel.setAlignmentX(CENTER_ALIGNMENT);
 		merchInfPanel = new JPanel();
-		merchInfPanel.setLayout(new GridLayout(3, 2));
+		merchInfPanel.setLayout(new GridLayout(2, 2));
 		merchInfPanel.setAlignmentX(CENTER_ALIGNMENT);
 		buttPanel = new JPanel();
 		buttPanel.setLayout(new BoxLayout(buttPanel, BoxLayout.Y_AXIS));
+		finishPanel = new JPanel();
+		finishPanel.setLayout(new BoxLayout(finishPanel, BoxLayout.X_AXIS));
 		
 		contentPane.add(reqInfPanel);
 		contentPane.add(reqListPanel);
+		contentPane.add(finishPanel);
 		
 		reqInfPanel.add(clientInfPanel);
 		reqInfPanel.add(merchInfPanel);
@@ -86,20 +89,18 @@ public class RequestForm extends JFrame{
 		merchName.setMaximumSize(new Dimension(170, 20));
 		merchAmount = new JTextField();
 		merchAmount.setMaximumSize(new Dimension(170, 20));
-		merchPrice = new JTextField();
-		merchPrice.setMaximumSize(new Dimension(170, 20));
 		
 		delReq = new JButton("Delete Request");
 		addMerch = new JButton("Add Item");
 		delMerch = new JButton("Delete Item");
-		editMerch = new JButton("Edit Item");
+		saveReq = new JButton("Save");
+		cancelReq = new JButton("Cancel");
 		
 		clN = new JLabel("Client name");
 		clSn = new JLabel("Client surname:");
 		clC = new JLabel("Client coordinates:");
 		merchN = new JLabel("Merchandise name");
-		merchAm = new JLabel("Mercandise amount");
-		merchPr = new JLabel("Merchandise price");		
+		merchAm = new JLabel("Mercandise amount");	
 		
 		clientInfPanel.add(clN);
 		clientInfPanel.add(clientName);
@@ -112,13 +113,13 @@ public class RequestForm extends JFrame{
 		merchInfPanel.add(merchName);
 		merchInfPanel.add(merchAm);
 		merchInfPanel.add(merchAmount);
-		merchInfPanel.add(merchPr);
-		merchInfPanel.add(merchPrice);
 		
 		buttPanel.add(delReq);
 		buttPanel.add(addMerch);
 		buttPanel.add(delMerch);
-		buttPanel.add(editMerch);
+		
+		finishPanel.add(saveReq);
+		finishPanel.add(cancelReq);
 		
 		String[] data = {"kfug", "akjfi","kefia"};
 		reqList = new JList<String>(data);
@@ -150,21 +151,26 @@ public class RequestForm extends JFrame{
 				controller.deleteMerchandise();
 				
 			}
-		});
+		});	
 		
-		editMerch.addActionListener(new ActionListener() {
+		saveReq.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.editMerchandise();
+			
 				
 			}
 		});
 		
-		
+		cancelReq.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 	
-
 	public void addNewItem(){
 
 	}
