@@ -1,20 +1,21 @@
 package by.bsu.lab2.controller;
 
-import by.bsu.lab2.dao.DataAccessor;
+import by.bsu.lab2.dao.UserAccessor;
+import by.bsu.lab2.dao.UserAccessor.Role;
 import by.bsu.lab2.ui.LoginForm;
 
 public class LoginController {
 
-	public DataAccessor dataAccessObject;
-	public LoginForm m_LoginForm;
+	private UserAccessor userAccessor;
+	private LoginForm loginForm;
 
-	public LoginController(LoginForm logForm){
-		m_LoginForm = logForm;
-
+	public LoginController(LoginForm loginForm){
+		this.loginForm = loginForm;
+		userAccessor = new UserAccessor();
 	}
 
-	public void doLogin(String login, String password){
-
+	public Role doLogin(String login, String password){
+		return userAccessor.doLogin(login, password);
 	}
 
 }

@@ -1,0 +1,3 @@
+MANAGER vasyan
+CLERK vasyan
+SALESMAN vasyan

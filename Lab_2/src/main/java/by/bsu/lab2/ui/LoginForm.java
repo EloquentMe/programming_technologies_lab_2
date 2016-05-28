@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import by.bsu.lab2.controller.LoginController;
+import by.bsu.lab2.dao.UserAccessor.Role;
 
 public class LoginForm extends JFrame{
 	
@@ -76,19 +77,13 @@ public class LoginForm extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if((loginField.getText().equals("User"))&&(String.valueOf(passField.getPassword()).equals("123")))
-				{
-					JOptionPane.showMessageDialog(null, "Yesssss");
-					
-				}
-				else
-				{
+				Role role = controller.doLogin(loginField.getText(), String.valueOf(passField.getPassword()));
+				
+				if (role == null) {
 					JOptionPane.showMessageDialog(null, "Noooooooooooo");
+				} else {
+					JOptionPane.showMessageDialog(null, String.format("%s logged in", role.name()));
 				}
-				
-				
-				controller.doLogin(loginField.getText(), String.valueOf(passField.getPassword()));
-				
 			}
 		});
 	}
