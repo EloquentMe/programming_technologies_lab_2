@@ -31,12 +31,31 @@ public class MerchandiseAccessor extends AbstractAccessor {
 		}
 	}
 	
+	public void deleteMerchandise(Merchandise merch) {
+		try {
+			Connection conn = getConnection();
+
+			PreparedStatement stmt = conn
+					.prepareStatement("delete from MERCHANDISE where name = ? "
+							+ "and amount = ? "
+							+ "and price = ? ");
+			
+			stmt.setString(1, merch.getName());
+			stmt.setInt(2, merch.getAmount());
+			stmt.setInt(3, merch.getPrice());
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Merchandise> getMerchandise() {
 		try {
 			Connection conn = getConnection();
 
 			PreparedStatement stmt = conn
-					.prepareStatement("select (name, amount, price) from MERCHANDISE");
+					.prepareStatement("select name, amount, price from MERCHANDISE");
 			
 			ResultSet rs = stmt.executeQuery();
 			

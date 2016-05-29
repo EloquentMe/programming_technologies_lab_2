@@ -4,9 +4,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -16,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import by.bsu.lab2.controller.InventoryController;
 import by.bsu.lab2.controller.RequestController;
+import by.bsu.lab2.entity.Merchandise;
 
 public class InventoryForm extends JFrame {
 	private JPanel contentPane;
@@ -26,8 +31,8 @@ public class InventoryForm extends JFrame {
 	private JPanel finishPanel;
 	private JList<String> invList;
 	private JTextField merchName;
-	private JTextField merchAmount;
-	private JTextField merchPrice;
+	private JFormattedTextField merchAmount;
+	private JFormattedTextField merchPrice;
 	private JLabel merchN;
 	private JLabel merchAm;
 	private JLabel merchPr;
@@ -35,11 +40,15 @@ public class InventoryForm extends JFrame {
 	private JButton delMerch;
 	private JButton saveInv;
 	private JButton cancelInv;
+	private NumberFormat integerNumberInstance;
+	private List<Merchandise> listM;
+	private DefaultListModel dlm;
 	
 	public InventoryController controller;
 
-	public InventoryForm(){
+	public InventoryForm() {
 		
+		integerNumberInstance = NumberFormat.getIntegerInstance();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
 		contentPane = new JPanel();
@@ -50,7 +59,7 @@ public class InventoryForm extends JFrame {
 		controller = new InventoryController(this);
 		
 		invListPanel = new JPanel();
-		invListPanel.setLayout(new BorderLayout(0,0));
+		invListPanel.setLayout(new BorderLayout(0, 0));
 		invInfPanel = new JPanel();
 		invInfPanel.setLayout(new BoxLayout(invInfPanel, BoxLayout.X_AXIS));
 		merchInfPanel = new JPanel();
@@ -70,9 +79,9 @@ public class InventoryForm extends JFrame {
 			
 		merchName = new JTextField();
 		merchName.setMaximumSize(new Dimension(170, 20));
-		merchAmount = new JTextField();
+		merchAmount = new JFormattedTextField(integerNumberInstance);
 		merchAmount.setMaximumSize(new Dimension(170, 20));
-		merchPrice = new JTextField();
+		merchPrice = new JFormattedTextField(integerNumberInstance);
 		merchPrice.setMaximumSize(new Dimension(170, 20));
 
 		addMerch = new JButton("Add Item");
@@ -98,9 +107,11 @@ public class InventoryForm extends JFrame {
 		finishPanel.add(saveInv);
 		finishPanel.add(cancelInv);
 		
-		String[] data = {"kfug", "akjfi","kefia"};
-		invList = new JList<String>(data);
-		
+		listM = controller.createInventory();
+		dlm = new DefaultListModel();
+		for(int i = 0; i < listM.size(); i++)
+			dlm.addElement(listM.get(i));
+		invList = new JList(dlm);
 		invListPanel.add(invList);
 		
 		
@@ -108,7 +119,11 @@ public class InventoryForm extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.addMerchandise();
+				Merchandise m = new Merchandise(merchName.getText(), 
+						Integer.parseInt(merchAmount.getText()), Integer.parseInt(merchPrice.getText()));
+				controller.addMerchandise(m);
+				dlm.addElement(m.toString());
+				listM.add(m);
 			}
 		});
 		
@@ -116,8 +131,10 @@ public class InventoryForm extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.deleteMerchandise();
-				
+				int removeIndex = invList.getSelectedIndex();
+				dlm.remove(removeIndex);
+				controller.deleteMerchandise(listM.get(removeIndex));
+				listM.remove(removeIndex);
 			}
 		});	
 		
@@ -125,8 +142,8 @@ public class InventoryForm extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-				
+				controller.updateInventory();
+				InventoryForm.this.setVisible(false);
 			}
 		});
 		
@@ -134,7 +151,7 @@ public class InventoryForm extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				InventoryForm.this.setVisible(false);
 			}
 		});
 	}

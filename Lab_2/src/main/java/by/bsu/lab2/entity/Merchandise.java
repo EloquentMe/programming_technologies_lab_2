@@ -5,6 +5,13 @@ public class Merchandise {
 	private String name;
 	private int price;
 	
+	public Merchandise(String name, int amount, int price) {
+		this.amount = amount;
+		this.name = name;
+		this.price = price;
+	}
+	public Merchandise() {
+	}
 	public int getAmount() {
 		return amount;
 	}
@@ -23,5 +30,7 @@ public class Merchandise {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	public String toString() {
+		return this.getName() + " " + this.getAmount() + " " + this.getPrice();
+	}
 }
