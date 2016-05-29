@@ -43,7 +43,7 @@ public class OrderForm extends JFrame{
 	public OrderForm(){
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 1000, 600);
 		
 		controller = new OrderController(this);
 		
@@ -63,18 +63,19 @@ public class OrderForm extends JFrame{
 		reqArea = new JTextArea();
 		reqScrollPane = new JScrollPane(reqArea);
 		amountField = new JTextField();
-		okButton = new JButton("OK");
+		amountField.setMaximumSize(new Dimension(170, 20));
+		okButton = new JButton("Save");
 		cancelButton = new JButton("Cancel");
 		addButton = new JButton("Add");
 		deleteButton = new JButton("Delete");
-		amountLabel = new JLabel("Amount:");
+		amountLabel = new JLabel("Amount");
 		
 		buttonsPanel = new JPanel();
 		editPanel = new JPanel();
 		amountPanel = new JPanel();
-		buttonsPanel.setLayout(new GridLayout(2, 0));
-		editPanel.setLayout(new GridLayout(3, 0));
-		amountPanel.setLayout(new GridLayout(1, 1));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		editPanel.setLayout(new BoxLayout(editPanel, BoxLayout.X_AXIS));
+		amountPanel.setLayout(new BoxLayout(amountPanel, BoxLayout.Y_AXIS));
 		buttonsPanel.add(amountLabel);
 		buttonsPanel.add(amountField);
 		buttonsPanel.add(addButton);
@@ -83,7 +84,7 @@ public class OrderForm extends JFrame{
 		editPanel.add(cancelButton);
 		editPanel.add(buttonsPanel);
 		
-		setLayout(new GridLayout(5, 0));
+		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		add(reqScrollPane);
 		add(invScrollPane);
 		add(buttonsPanel);
