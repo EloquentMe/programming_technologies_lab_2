@@ -18,7 +18,7 @@ public class RequestAccessor extends AbstractAccessor {
 			Connection conn = getConnection();
 
 			PreparedStatement stmt = conn
-					.prepareStatement("insert into REQUEST (name,surname,coordinates, description) values (?,?,?,?)");
+					.prepareStatement("insert into REQUEST (name, surname, coordinates, description) values (?,?,?,?)");
 			
 			stmt.setString(1, req.getClient().getName());
 			stmt.setString(2, req.getClient().getSurname());
@@ -57,7 +57,7 @@ public class RequestAccessor extends AbstractAccessor {
 			Connection conn = getConnection();
 
 			PreparedStatement stmt = conn
-					.prepareStatement("select (name,surname,coordinates, description) from REQUEST");
+					.prepareStatement("select name, surname, coordinates, description from REQUEST");
 			
 			ResultSet rs = stmt.executeQuery();
 			

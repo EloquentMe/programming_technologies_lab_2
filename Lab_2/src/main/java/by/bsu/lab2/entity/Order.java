@@ -11,6 +11,13 @@ public class Order {
 	public long getId() {
 		return id;
 	}
+	public Order() {
+	}
+	public Order(long id, Person client, List<Merchandise> existingProducts) {
+		this.id = id;
+		this.client = client;
+		this.existingProducts = existingProducts;
+	}
 	public void setId(long id) {
 		this.id = id;
 	}

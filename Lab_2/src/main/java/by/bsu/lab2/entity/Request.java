@@ -23,5 +23,7 @@ public class Request {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	public String toString() {
+		return this.client.getName() + " " + this.client.getSurname() + " " + this.client.getCoordinates();
+	}
 }

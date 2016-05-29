@@ -20,7 +20,7 @@ public class AccountingAccessor  extends AbstractAccessor {
 			PreparedStatement stmt;
 
 			stmt = conn
-					.prepareStatement("insert into LOG (client, info, total_amount, total_price) value (?,?,?,?)");
+					.prepareStatement("insert into LOG (client, info, total_amount, total_price) values (?,?,?,?)");
 			stmt.setString(1, order.getClient().toString());
 			stmt.setString(2, productsLog(order.getExistingProducts()));
 			stmt.setInt(3, totalAmount(order.getExistingProducts()));
