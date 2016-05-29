@@ -139,10 +139,11 @@ public class OrderForm extends JFrame implements ListSelectionListener {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				int i = invList.getSelectedIndex();
-				if(!amountField.getText().isEmpty() & (i != -1)) {
+				int i1 = listM.get(i).getAmount() - Integer.parseInt(amountField.getText());
+				if(!amountField.getText().isEmpty() & (i != -1) & (i1 > -1)) {
 					Merchandise m = new Merchandise(listM.get(i).getName(), Integer.parseInt(amountField.getText()),listM.get(i).getPrice());
 					dlmO.addElement(m.toStringReq());
-					listOAdd.add(new Merchandise(listM.get(i).getName(), listM.get(i).getAmount() - Integer.parseInt(amountField.getText()),listM.get(i).getPrice()));
+					listOAdd.add(new Merchandise(listM.get(i).getName(), i1, listM.get(i).getPrice()));
 					listO.add(m);
 					}
 			} });
