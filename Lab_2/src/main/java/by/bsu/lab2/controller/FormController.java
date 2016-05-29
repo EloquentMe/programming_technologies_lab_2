@@ -1,6 +1,5 @@
 package by.bsu.lab2.controller;
 
-import by.bsu.lab2.Starter;
 import by.bsu.lab2.dao.UserAccessor.Role;
 import by.bsu.lab2.ui.InventoryForm;
 import by.bsu.lab2.ui.LoginForm;
@@ -30,24 +29,17 @@ public class FormController {
 	}
 	
 	public void showForm(Role role){
-		if(role.name().equals("CLERK"))
-		{
+		switch(role) {
+		case CLERK:
 			reqForm.setVisible(true);
+			break;
+		case MANAGER:
+			invForm.setVisible(true);
+			break;
+		case SALESMAN:
+			orderForm.setVisible(true);
+			break;
 		}
-		else
-		{
-			if(role.name().equals("MANAGER"))
-			{
-				invForm.setVisible(true);
-			}
-			else{
-				if(role.name().equals("SALESMAN"))
-				{
-					orderForm.setVisible(true);
-				}
-			}
-		}
-		
 	}
 	public void hideEverything()
 	{
