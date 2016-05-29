@@ -33,4 +33,7 @@ public class Merchandise {
 	public String toString() {
 		return this.getName() + " " + this.getAmount() + " " + this.getPrice();
 	}
+	public String toStringReq() {
+		return this.getName() + " " + this.getAmount() + " ";
+	}
 }

@@ -119,11 +119,13 @@ public class InventoryForm extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(!merchName.getText().isEmpty() & !merchAmount.getText().isEmpty() & !merchPrice.getText().isEmpty()) {
 				Merchandise m = new Merchandise(merchName.getText(), 
 						Integer.parseInt(merchAmount.getText()), Integer.parseInt(merchPrice.getText()));
 				controller.addMerchandise(m);
 				dlm.addElement(m.toString());
 				listM.add(m);
+				}
 			}
 		});
 		
@@ -132,9 +134,11 @@ public class InventoryForm extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int removeIndex = invList.getSelectedIndex();
+				if(removeIndex != -1) {
 				dlm.remove(removeIndex);
 				controller.deleteMerchandise(listM.get(removeIndex));
 				listM.remove(removeIndex);
+				}
 			}
 		});	
 		

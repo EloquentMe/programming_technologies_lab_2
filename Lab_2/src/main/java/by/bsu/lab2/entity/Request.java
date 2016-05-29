@@ -5,6 +5,12 @@ public class Request {
 	private Person client;
 	private String description;
 	
+	public Request(Person client, String description) {
+		this.client = client;
+		this.description = description;
+	}
+	public Request() {
+	}
 	public Person getClient() {
 		return client;
 	}

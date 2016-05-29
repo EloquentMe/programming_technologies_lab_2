@@ -6,6 +6,15 @@ public class Person {
 	private String surname;
 	
 
+	public Person() {
+		
+	}
+	public Person(String coordinates, String name, String surname) {
+		this.coordinates = coordinates;
+		this.name = name;
+		this.surname = surname;
+	}
+	
 	public String getCoordinates() {
 		return coordinates;
 	}

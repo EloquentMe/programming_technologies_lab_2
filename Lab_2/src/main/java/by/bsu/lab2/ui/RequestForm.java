@@ -4,9 +4,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -15,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import by.bsu.lab2.controller.RequestController;
+import by.bsu.lab2.entity.Merchandise;
+import by.bsu.lab2.entity.Person;
+import by.bsu.lab2.entity.Request;
 
 public class RequestForm extends JFrame{
 
@@ -30,7 +38,7 @@ public class RequestForm extends JFrame{
 	private JTextField clientSurname;
 	private JTextField clientCoord;
 	private JTextField merchName;
-	private JTextField merchAmount;
+	private JFormattedTextField merchAmount;
 	private JLabel clN;
 	private JLabel clSn;
 	private JLabel clC;
@@ -41,10 +49,14 @@ public class RequestForm extends JFrame{
 	private JButton delMerch;
 	private JButton saveReq;
 	private JButton cancelReq;
+	private List<Merchandise> listM;
+	private DefaultListModel dlm;
+	private NumberFormat integerNumberInstance;
 	
 	public RequestController controller;
 
 	public RequestForm(){
+		listM = new ArrayList<Merchandise>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
@@ -78,16 +90,16 @@ public class RequestForm extends JFrame{
 		reqInfPanel.add(merchInfPanel);
 		reqInfPanel.add(buttPanel);
 			
-		
-		clientName = new JTextField();
+		clientName = new JTextField("");
 		clientName.setMaximumSize(new Dimension(170, 20));
-		clientSurname= new JTextField();
+		clientSurname= new JTextField("");
 		clientSurname.setMaximumSize(new Dimension(170, 20));
-		clientCoord = new JTextField();
+		clientCoord = new JTextField("");
 		clientCoord.setMaximumSize(new Dimension(170, 20));
 		merchName = new JTextField();
 		merchName.setMaximumSize(new Dimension(170, 20));
-		merchAmount = new JTextField();
+		integerNumberInstance = NumberFormat.getIntegerInstance();
+		merchAmount = new JFormattedTextField(integerNumberInstance);
 		merchAmount.setMaximumSize(new Dimension(170, 20));
 		
 		delReq = new JButton("Delete Request");
@@ -97,8 +109,8 @@ public class RequestForm extends JFrame{
 		cancelReq = new JButton("Cancel");
 		
 		clN = new JLabel("Client name");
-		clSn = new JLabel("Client surname:");
-		clC = new JLabel("Client coordinates:");
+		clSn = new JLabel("Client surname");
+		clC = new JLabel("Client coordinates");
 		merchN = new JLabel("Merchandise name");
 		merchAm = new JLabel("Mercandise amount");	
 		
@@ -121,8 +133,8 @@ public class RequestForm extends JFrame{
 		finishPanel.add(saveReq);
 		finishPanel.add(cancelReq);
 		
-		String[] data = {"kfug", "akjfi","kefia"};
-		reqList = new JList<String>(data);
+		dlm = new DefaultListModel();
+		reqList = new JList<String>(dlm);
 		
 		reqListPanel.add(reqList);
 		
@@ -131,8 +143,13 @@ public class RequestForm extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.deleteRequest();
-				
+				dlm.clear();
+				listM.removeAll(listM);
+				merchName.setText("");
+				merchAmount.setText("");
+				clientName.setText("");
+				clientSurname.setText("");
+				clientCoord.setText("");
 			}
 		});
 		
@@ -140,7 +157,12 @@ public class RequestForm extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.addMerchandise();
+				if(!merchName.getText().isEmpty() & !merchAmount.getText().isEmpty()) {
+				Merchandise m = new Merchandise(merchName.getText(), 
+						Integer.parseInt(merchAmount.getText()), 0);
+				dlm.addElement(m.toStringReq());
+				listM.add(m);
+				}
 			}
 		});
 		
@@ -148,8 +170,11 @@ public class RequestForm extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.deleteMerchandise();
-				
+				if(!dlm.isEmpty()) {
+				int removeIndex = reqList.getSelectedIndex();
+				dlm.remove(removeIndex);
+				listM.remove(removeIndex);
+				}
 			}
 		});	
 		
@@ -157,8 +182,19 @@ public class RequestForm extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-				
+				if(!clientName.getText().isEmpty() & !clientSurname.getText().isEmpty() & !clientCoord.getText().isEmpty() & !dlm.isEmpty()) {
+				Person p = new Person(clientName.getText(), clientSurname.getText(), clientCoord.getText());
+				StringBuffer d = new StringBuffer();
+				for(int i = 0; i < listM.size(); i++) {
+					d.append(listM.get(i).toStringReq());
+					d.append(", ");
+				} 
+				d.setCharAt(d.length() - 2, '.');
+				System.out.println(d);
+				Request r = new Request(p, d.toString());
+			controller.addRequest(r);
+			RequestForm.this.setVisible(false);	
+			}
 			}
 		});
 		
@@ -166,7 +202,7 @@ public class RequestForm extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				RequestForm.this.setVisible(false);
 			}
 		});
 	}
