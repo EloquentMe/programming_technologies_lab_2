@@ -14,6 +14,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -40,11 +41,31 @@ public class InventoryForm extends JFrame {
 	private JButton delMerch;
 	private JButton saveInv;
 	private JButton cancelInv;
+	private JButton printInv;
 	private NumberFormat integerNumberInstance;
 	private List<Merchandise> listM;
 	private DefaultListModel dlm;
 	
+	
+	
+	public List<Merchandise> getListM() {
+		return listM;
+	}
+
+	public void setListM(List<Merchandise> listM) {
+		this.listM = listM;
+	}
+
 	public InventoryController controller;
+
+	
+	public JList<String> getInvList() {
+		return invList;
+	}
+
+	public void setInvList(JList<String> invList) {
+		this.invList = invList;
+	}
 
 	public InventoryForm() {
 		
@@ -88,6 +109,7 @@ public class InventoryForm extends JFrame {
 		delMerch = new JButton("Delete Item");
 		saveInv = new JButton("Save");
 		cancelInv = new JButton("Cancel");
+		printInv = new JButton ("Print");
 		
 
 		merchN = new JLabel("Merchandise name");
@@ -103,6 +125,7 @@ public class InventoryForm extends JFrame {
 		
 		buttPanel.add(addMerch);
 		buttPanel.add(delMerch);
+		buttPanel.add(printInv);
 		
 		finishPanel.add(saveInv);
 		finishPanel.add(cancelInv);
@@ -147,6 +170,7 @@ public class InventoryForm extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.updateInventory();
+				JOptionPane.showMessageDialog(null, "Inventory updated");
 				InventoryForm.this.setVisible(false);
 			}
 		});
@@ -158,29 +182,19 @@ public class InventoryForm extends JFrame {
 				InventoryForm.this.setVisible(false);
 			}
 		});
+		
+		printInv.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.printInventory();
+				InventoryForm.this.setVisible(false);
+				
+			}
+		});
 	}
 
 	public void finalize() throws Throwable {
-
-	}
-
-	public void addMerchndise(){
-
-	}
-
-	public void createInventory(){
-
-	}
-
-	public void deleteMerchandise(){
-
-	}
-
-	public void showInventory(){
-
-	}
-
-	public void updateInventory(){
 
 	}
 

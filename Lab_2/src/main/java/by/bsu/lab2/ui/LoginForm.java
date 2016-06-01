@@ -98,8 +98,4 @@ public class LoginForm extends JFrame{
 		});
 	}
 
-	public void doLogin(){
-
-	}
-
 }

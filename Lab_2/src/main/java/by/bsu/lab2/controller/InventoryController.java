@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import by.bsu.lab2.dao.MerchandiseAccessor;
 import by.bsu.lab2.dao.RequestAccessor;
 import by.bsu.lab2.entity.Merchandise;
@@ -35,6 +37,17 @@ public class InventoryController implements ActionListener{
 		return temp; 
 	}
 
+	
+	public void printInventory()
+	{
+		String res = "";
+		for(Merchandise i : m_InventoryForm.getListM())
+		{
+			res+= i.toString() + "\n";
+		}
+		JOptionPane.showMessageDialog(null, res);
+	}
+	
 	public void deleteMerchandise(Merchandise merch) {
 		tempDel.add(merch);
 	}

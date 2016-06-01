@@ -206,25 +206,4 @@ public class RequestForm extends JFrame{
 			}
 		});
 	}
-	
-	public void addNewItem(){
-
-	}
-
-	public void deleteItem(){
-
-	}
-
-	public void editItem(){
-
-	}
-
-	public void getRequest(){
-
-	}
-
-	public void saveRequest(){
-
-	}
-
 }

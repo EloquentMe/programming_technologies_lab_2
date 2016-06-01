@@ -16,6 +16,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -33,7 +34,7 @@ import by.bsu.lab2.entity.Request;
 
 public class OrderForm extends JFrame implements ListSelectionListener {
 
-	private JButton okButton;
+	private JButton saveButton;
 	private JButton cancelButton;
 	private JButton addButton;
 	private JButton deleteButton;
@@ -105,7 +106,7 @@ public class OrderForm extends JFrame implements ListSelectionListener {
 		reqScrollPane = new JScrollPane(reqArea);
 		amountField = new JFormattedTextField(integerNumberInstance);
 		amountField.setMaximumSize(new Dimension(170, 20));
-		okButton = new JButton("Save");
+		saveButton = new JButton("Save");
 		cancelButton = new JButton("Cancel");
 		addButton = new JButton("Add");
 		deleteButton = new JButton("Delete");
@@ -121,7 +122,7 @@ public class OrderForm extends JFrame implements ListSelectionListener {
 		buttonsPanel.add(amountField);
 		buttonsPanel.add(addButton);
 		buttonsPanel.add(deleteButton);
-		editPanel.add(okButton);
+		editPanel.add(saveButton);
 		editPanel.add(cancelButton);
 		editPanel.add(buttonsPanel);
 		
@@ -146,6 +147,10 @@ public class OrderForm extends JFrame implements ListSelectionListener {
 					listOAdd.add(new Merchandise(listM.get(i).getName(), i1, listM.get(i).getPrice()));
 					listO.add(m);
 					}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Something is wrong with the amount of product");
+				}
 			} });
 		deleteButton.addActionListener(new ActionListener() {
 
@@ -159,7 +164,7 @@ public class OrderForm extends JFrame implements ListSelectionListener {
 					listOAdd.remove(removeIndex);
 				}
 			} });
-		okButton.addActionListener(new ActionListener() {
+		saveButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -182,42 +187,6 @@ public class OrderForm extends JFrame implements ListSelectionListener {
 				
 			} });
 		
-	}
-
-	public void createOrder(){
-
-	}
-
-	public void saveOrder(){
-
-	}
-
-	public void selectMerchandise(){
-
-	}
-
-	public void selectRequest(){
-
-	}
-
-	public void showInventory(){
-
-	}
-
-	public void showMerchandise (){
-
-	}
-
-	public void showOrderForm(){
-
-	}
-
-	public void showRequestForm(){
-
-	}
-
-	public void showRequestList(){
-
 	}
 
 	@Override
